@@ -20,3 +20,10 @@ qc.h(qreg_q[1])
 qc.h(qreg_q[1])
 qc.measure(qreg_q, creg_c)
 qc.draw()
+for i in [1,10,100,1000]:
+    backend=Aer.get_backend('qasm_simulator')
+    job = execute(qc, backend, shots=i) 
+    # shots default = 1024 
+    result = job.result()
+    print(result.get_counts()) 
+    plot_histogram(result.get_counts())
